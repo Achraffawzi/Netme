@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss"],
   runtimeConfig: {
     MONGO_URI: process?.env?.MONGO_URI,
+    API_URL: process?.env?.API_URL,
   },
   nitro: {
     plugins: ["~/server/index.ts"],
