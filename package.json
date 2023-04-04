@@ -11,5 +11,8 @@
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.6.5",
     "nuxt": "^3.3.3"
+  },
+  "dependencies": {
+    "mongoose": "^7.0.3"
   }
 }
