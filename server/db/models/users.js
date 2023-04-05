@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -21,7 +22,6 @@ const userSchema = new mongoose.Schema({
   },
   picture: {
     type: String,
-    required: true,
   },
   isVerified: {
     type: String,
@@ -31,6 +31,14 @@ const userSchema = new mongoose.Schema({
     type: Array,
     length: 5,
   },
+});
+
+// Hashing the password before saving the user to DB
+userSchema.pre("save", function () {
+  if (this.isModified("password") && this.password !== "") {
+    console.log("password changed");
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+  }
 });
 
 export default mongoose.model("user", userSchema);

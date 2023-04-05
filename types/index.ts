@@ -1,0 +1,1 @@
+export { IUserResponse } from "./IUserResponse";
