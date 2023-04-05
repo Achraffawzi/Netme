@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
     type: Array,
     length: 5,
   },
+  otp: {
+    type: Number,
+  },
 });
 
 // Hashing the password before saving the user to DB

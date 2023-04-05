@@ -16,3 +16,19 @@ export const getUserByUsernameOrEmail = (
     }
   });
 };
+
+export const findUserByIdAndUpdate = (
+  id: string,
+  prop: number
+): Promise<IUserResponse | boolean> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const updatedUser = await Users.findByIdAndUpdate(id, {
+        otp: prop,
+      });
+      resolve(true);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

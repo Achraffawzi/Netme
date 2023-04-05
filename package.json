@@ -16,7 +16,8 @@
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.35.0",
     "formidable": "^2.1.1",
-    "mongoose": "^7.0.3"
+    "mongoose": "^7.0.3",
+    "nodemailer": "^6.9.1"
   },
   "type": "module"
 }

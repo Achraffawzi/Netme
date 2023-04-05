@@ -1,8 +1,14 @@
 import formidable from "formidable";
 import User from "~/server/db/models/users.js";
-import { getUserByUsernameOrEmailService } from "~/server/services/users";
+import {
+  findUserByIdAndUpdateService,
+  getUserByUsernameOrEmailService,
+} from "~/server/services/users";
 import cloudinary from "cloudinary";
 import "~/server/config/cloudinary.js";
+import { sendVerificationEmail } from "~/server/utils/mail";
+import { upload } from "~/server/utils/upload";
+import { userTransformer } from "~/server/transformers/user";
 
 export default defineEventHandler((event) => {
   const form = formidable({ multiples: false });
@@ -24,19 +30,11 @@ export default defineEventHandler((event) => {
       // store the image in cloudinary if the file exists in req body
       if (files.picture) {
         if (files.picture.mimetype.startsWith("image/")) {
-          // store the image file in cloudinary
-          cloudinary.v2.config({
-            cloud_name: process.env.CLOUDINARY_NAME,
-            api_key: process.env.CLOUDINARY_API_KEY,
-            api_secret: process.env.CLOUDINARY_API_SECRET,
-          });
-
-          var cloudinaryResult = await cloudinary.v2.uploader.upload(
-            files?.picture?.filepath,
-            {
-              folder: "users_pictures",
-            }
-          );
+          try {
+            var cloudinaryResult = await upload(files, "users_pictures");
+          } catch (error) {
+            reject(error);
+          }
         } else {
           return sendError(event, {
             statusCode: 400,
@@ -69,11 +67,19 @@ export default defineEventHandler((event) => {
         var result = await user.save();
 
         // send verification email
+        const opt = await sendVerificationEmail(user);
+
+        // saving otp to DB
+        try {
+          await findUserByIdAndUpdateService(user._id, opt);
+        } catch (error) {
+          console.log(error);
+        }
 
         // send res
         resolve({
           statusCode: 200,
-          statusMessage: user,
+          statusMessage: userTransformer(user),
         });
       } catch (error) {
         if (result) {
