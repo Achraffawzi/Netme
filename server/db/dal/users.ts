@@ -32,3 +32,35 @@ export const findUserByIdAndUpdate = (
     }
   });
 };
+
+export const findUserByProp = (
+  prop: string,
+  value: any
+): Promise<IUserResponse | null> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user: IUserResponse | null = await Users.findOne({
+        [prop]: value,
+      });
+      resolve(user);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const findUserByIdAndUpdateV2 = (id: string): Promise<boolean> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await Users.findByIdAndUpdate(id, {
+        isVerified: true,
+        $unset: {
+          otp: "",
+        },
+      });
+      resolve(true);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

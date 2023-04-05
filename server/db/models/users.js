@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   isVerified: {
-    type: String,
+    type: boolean,
     default: false,
   },
   interests: {

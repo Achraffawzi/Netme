@@ -2,6 +2,7 @@ import { IUserResponse } from "~/types";
 import {
   getUserByUsernameOrEmail,
   findUserByIdAndUpdate,
+  findUserByProp,
 } from "~/server/db/dal/users";
 
 export const getUserByUsernameOrEmailService = async (
@@ -20,6 +21,20 @@ export const findUserByIdAndUpdateService = async (
     try {
       await findUserByIdAndUpdate(id, prop);
       resolve(true);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const findUserByPropService = (
+  prop: string,
+  value: any
+): Promise<IUserResponse | null> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await findUserByProp(prop, value);
+      resolve(user);
     } catch (error) {
       reject(error);
     }
