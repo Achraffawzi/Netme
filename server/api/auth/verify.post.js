@@ -1,8 +1,5 @@
 import { findUserByIdAndUpdateV2 } from "~/server/db/dal/users";
-import {
-  findUserByIdAndUpdateService,
-  findUserByPropService,
-} from "~/server/services/users";
+import { findUserByPropService } from "~/server/services/users";
 
 export default defineEventHandler(async (event) => {
   // validate body
