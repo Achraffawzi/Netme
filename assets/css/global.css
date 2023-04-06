@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Inter";
+    src: local("Inter"),
+        url('~/assets/css/Inter/Inter-VariableFont_slnt,wght.ttf') format("truetype");
+}
+
+html {
+    font-family: "Inter";
+}
