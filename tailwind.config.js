@@ -16,6 +16,9 @@ export default {
         darkPurple: "#453AA4",
       },
     },
+    minWidth: {
+      "1/2": "50%",
+    },
   },
   plugins: [],
 };

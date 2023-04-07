@@ -2,7 +2,7 @@
     <div class="flex flex-col justify-start items-start flex-wrap mt-8 w-full">
         <label>{{ label }}</label>
         <input
-          class="bg-light p-2.5  border-2 border-gray-200 outline-none mt-1 w-full rounded-sm"
+        class="bg-light p-1  border-2 border-gray-200 outline-none mt-1 w-full rounded-md"
           :type="type"
           @input="onInputChanged"
           :value="value"
