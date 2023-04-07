@@ -8,7 +8,14 @@ export default {
     "./nuxt.config.{js,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        creemy: "#F8F7FF",
+        lightPurple: "#B8B8FF",
+        normalPurple: "#9381FF",
+        darkPurple: "#453AA4",
+      },
+    },
   },
   plugins: [],
 };

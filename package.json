@@ -10,7 +10,8 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.6.5",
-    "nuxt": "^3.3.3"
+    "nuxt": "^3.3.3",
+    "nuxt-icon": "^0.3.3"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
