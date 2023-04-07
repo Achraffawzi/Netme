@@ -1,6 +1,12 @@
 <template>
     <div class="flex flex-col justify-start items-center flex-wrap mx-auto max-w-xs w-11/12 pt-5">
         <ImagePicker name="picture" @input-changed="inputChanged($event)" />
+
+        <FormInput label="Username" type="text" name="username" :value="user.username" @input-changed="inputChanged($event)" />
+
+        <FormInput label="Email" type="email" name="email" :value="user.email" @input-changed="inputChanged($event)" />
+
+        <FormInput label="Password" type="password" name="password" :value="user.password" @input-changed="inputChanged($event)" />
     </div>
 </template>
 
