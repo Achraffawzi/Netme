@@ -1,13 +1,15 @@
 <template>
     <div class="flex min-h-screen">
         <!-- Dynamic content -->
-        <Container class="basis-1/2 py-2">
+        <Container class="md:basis-1/2 py-2 flex flex-col">
             <Logo />
-            <slot></slot>
+            <div class="flex flex-col items-center justify-center flex-1">
+                <slot></slot>
+            </div>
         </Container>
 
         <!-- Full bg image -->
-        <div class="basis-1/2">
+        <div class="hidden lg:flex basis-1/2">
             <img class="h-full" src="~/assets/images/futuristic.jpg" alt="futuristic">
         </div>
     </div>

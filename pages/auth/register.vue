@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-start items-center flex-wrap mx-auto max-w-xs w-11/12 pt-5">
+    <div class="flex flex-col justify-start items-center flex-wrap mx-auto max-w-xs w-11/12 pt-5 2xl:max-w-md">
         <ImagePicker name="picture" @input-changed="inputChanged($event)" />
 
         <FormInput label="Username" type="text" name="username" :value="user.username" @input-changed="inputChanged($event)" />
