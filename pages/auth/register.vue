@@ -8,7 +8,7 @@
 
         <FormInput label="Password" type="password" name="password" :value="user.password" @input-changed="inputChanged($event)" />
 
-        <TagInput :max="5" :tags="user.interests" label="Interests" placeholder="Enter an interest" @on-tag-added="handleAddInterest($event)" />
+        <TagInput :max="5" :tags="user.interests" label="Interests" placeholder="Enter an interest" @on-tag-added="handleAddInterest($event)" @on-tag-deleted="handleDeleteInterest($event)" />
     </div>
 </template>
 
@@ -30,6 +30,10 @@ const user = ref<IRegisterPayload>({
 
 const handleAddInterest = (payload: string): void => {
     user.value.interests = [...user.value.interests, payload];
+}
+
+const handleDeleteInterest = (payload: string[]): void => {
+    user.value.interests = [...payload];
 }
 
 const inputChanged = (payload: {name: string, value: string}): void => {
