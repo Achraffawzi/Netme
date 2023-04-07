@@ -9,6 +9,9 @@
         <FormInput label="Password" type="password" name="password" :value="user.password" @input-changed="inputChanged($event)" />
 
         <TagInput :max="5" :tags="user.interests" label="Interests" placeholder="Enter an interest" @on-tag-added="handleAddInterest($event)" @on-tag-deleted="handleDeleteInterest($event)" />
+
+        <Button content="Sign up" :full="true" class="mt-5" />
+        <span class="text-sm self-start">Already have an account? <NuxtLink to="/auth/login" class="font-bold text-darkPurple">Log in</NuxtLink></span>
     </div>
 </template>
 
