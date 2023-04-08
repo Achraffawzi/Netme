@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-screen">
         <!-- Dynamic content -->
-        <Container class="md:basis-1/2 py-2 flex flex-col">
+        <Container class=" py-2 flex flex-col w-4/5 md:basis-1/2">
             <Logo />
             <div class="flex flex-col items-center justify-center flex-1">
                 <slot></slot>
