@@ -17,7 +17,18 @@ export default defineNuxtConfig({
     strict: true,
   },
   css: ["~/assets/css/global.css"],
-  modules: ["@nuxtjs/tailwindcss", "nuxt-icon"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "nuxt-icon",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+  ],
+  piniaPersistedstate: {
+    cookieOptions: {
+      sameSite: "strict",
+    },
+    storage: "localStorage",
+  },
   runtimeConfig: {
     public: {
       APP_NAME: "StoryBlogy",
