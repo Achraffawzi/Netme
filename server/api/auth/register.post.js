@@ -59,7 +59,7 @@ export default defineEventHandler((event) => {
           username,
           email,
           password,
-          interests,
+          interests: JSON.parse(interests),
           picture: files ? cloudinaryResult?.url : "",
         });
 
