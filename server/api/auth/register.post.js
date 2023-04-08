@@ -79,7 +79,8 @@ export default defineEventHandler((event) => {
         // send res
         resolve({
           statusCode: 200,
-          statusMessage: userTransformer(user),
+          statusMessage:
+            "Please use the OTP sent to your email to verify your account",
         });
       } catch (error) {
         if (result) {

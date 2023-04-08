@@ -10,7 +10,7 @@
 
         <TagInput :max="5" :tags="user.interests" label="Interests" placeholder="Enter an interest" @on-tag-added="handleAddInterest($event)" @on-tag-deleted="handleDeleteInterest($event)" />
 
-        <Button content="Sign up" :full="true" class="mt-5" />
+        <Button @click="handleLogin" content="Sign up" :full="true" class="mt-5" />
         <span class="text-sm self-start">Already have an account? <NuxtLink to="/auth/login" class="font-bold text-darkPurple">Log in</NuxtLink></span>
     </div>
 </template>
@@ -18,6 +18,9 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import {IRegisterPayload} from "~/types"
+import {useAuth} from '~/composables/useAuth.js';
+
+const { register } = useAuth();
 
 definePageMeta({
     layout: "auth",
@@ -41,5 +44,10 @@ const handleDeleteInterest = (payload: string[]): void => {
 
 const inputChanged = (payload: {name: string, value: string}): void => {
     user.value = {...user.value, [payload.name]: payload.value};
+}
+
+const handleLogin = async () => {
+    const data = await register(user.value);
+    // show data message in an alert
 }
 </script>
