@@ -7,6 +7,16 @@ export default {
     "./plugins/**/*.{js,ts}",
     "./nuxt.config.{js,ts}",
   ],
+  safelist: [
+    "bg-alertDarkError",
+    "bg-alertLightError",
+    "bg-alertDarkWarning",
+    "bg-alertLightWarning",
+    "bg-alertDarkSuccess",
+    "bg-alertLightSuccess",
+    "bg-alertDarkInfo",
+    "bg-alertLightInfo",
+  ],
   theme: {
     extend: {
       colors: {
@@ -15,14 +25,14 @@ export default {
         normalPurple: "#9381FF",
         darkPurple: "#453AA4",
 
-        alertDarkError: "rgba(255, 0, 0, 0.7)",
-        alertLightError: "rgba(255, 0, 0, 0.2)",
-        alertDarkWarning: "rgba(255, 135, 46, 0.7)",
-        alertLightWarning: "rgba(255, 135, 46, 0.2)",
+        alertDarkError: "#e90707b3",
+        alertLightError: "rgba(190, 1, 1, 1)", //rgba(208, 1, 1, 0.5)
+        alertDarkWarning: "rgb(236, 202, 0, 0.62)",
+        alertLightWarning: "rgb(236, 202, 0, 0.62)",
         alertDarkSuccess: "rgba(0, 136, 0, 0.7)",
-        alertLightWarning: "rgba(0, 136, 0, 0.2)",
+        alertLightSuccess: "rgba(0, 136, 0, 0.6)",
         alertDarkInfo: "rgba(7, 144, 250, 0.7)",
-        alertLightInfo: "rgba(7, 144, 250, 0.2)",
+        alertLightInfo: "rgba(7, 144, 250, 0.6)",
       },
     },
     minWidth: {

@@ -1,7 +1,8 @@
 <template>
-    <div class="bg-red-800">
-        <h1 class="text-9xl text-white" @click="change">test</h1>
-    </div>
+    <Alert icon-class="ic:baseline-error-outline" content="testing alert" dark='alertDarkError' light='alertLightError' />
+    <Alert icon-class="ic:baseline-error-outline" content="testing alert" dark='alertDarkWarning' light='alertLightWarning' />
+        <Alert icon-class="ic:baseline-error-outline" content="testing alert" dark='alertDarkSuccess' light='alertLightSuccess' />
+    <Alert icon-class="ic:baseline-error-outline" content="testing alert" dark='alertDarkInfo' light='alertLightInfo' />
 </template>
 
 <script setup>
