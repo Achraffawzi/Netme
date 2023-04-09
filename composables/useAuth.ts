@@ -1,11 +1,9 @@
-import { IRegisterPayload, IUserResponse } from "~/types";
+import { IRegisterPayload, IStatusResponse } from "~/types";
 
 export const useAuth = () => {
   const { $axiosPublic } = useNuxtApp();
 
-  const register = async (
-    user: IRegisterPayload
-  ): Promise<IUserResponse | boolean> => {
+  const register = async (user: IRegisterPayload): Promise<IStatusResponse> => {
     return new Promise(async (resolve, reject) => {
       const formData = new FormData();
       for (let key in user) {

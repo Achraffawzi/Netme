@@ -37,8 +37,19 @@ export default defineNuxtConfig({
       ICONS: {
         SUCCESS: "ic:baseline-check",
         WARNING: "ic:outline-warning-amber",
-        ERROR: "ic:outline-close",
+        ERROR: "ic:outline-error-outline",
         INFO: "ic:outline-info",
+      },
+
+      COLORS: {
+        ALERT_DARK_ERROR: "alertDarkError",
+        ALERT_LIGHT_ERROR: "alertLightError",
+        ALERT_DARK_WARNING: "alertDarkWarning",
+        ALERT_LIGHT_WARNING: "alertLightWarning",
+        ALERT_DARK_SUCCESS: "alertDarkSuccess",
+        ALERT_LIGHT_SUCCESS: "alertLightSuccess",
+        ALERT_DARK_INFO: "alertDarkInfo",
+        ALERT_LIGHT_INFO: "alertLightInfo",
       },
     },
 
