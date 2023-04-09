@@ -33,6 +33,13 @@ export default defineNuxtConfig({
     public: {
       APP_NAME: "StoryBlogy",
       API_URL: process?.env?.API_URL,
+
+      ICONS: {
+        SUCCESS: "ic:baseline-check",
+        WARNING: "ic:outline-warning-amber",
+        ERROR: "ic:outline-close",
+        INFO: "ic:outline-info",
+      },
     },
 
     MONGO_URI: process?.env?.MONGO_URI,
