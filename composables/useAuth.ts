@@ -14,13 +14,13 @@ export const useAuth = () => {
         }
       }
 
-      const { data } = await $axiosPublic.post("/auth/register", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      resolve(data);
       try {
+        const { data } = await $axiosPublic.post("/auth/register", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        resolve(data);
       } catch (error) {
         reject(error);
       }

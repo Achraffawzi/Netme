@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col justify-start items-center flex-wrap mx-auto max-w-xs w-11/12 pt-5">
-        <Alert v-on:on-click="handleCloseAlert"  v-if="isAlertOpen" :content="alert.content" :icon-class="alert.iconClass" :dark="alert.dark" :light="alert.light" />
+        <Alert v-on:on-click="handleCloseAlert"  v-if="isAlertOpen" :content="alert!.content" :icon-class="alert!.iconClass" :dark="alert!.dark" :light="alert!.light" />
 
         <ImagePicker name="picture" @input-changed="inputChanged($event)" />
 
@@ -19,12 +19,13 @@
 
 <script setup lang="ts">
 import {ref} from 'vue'
-import {IRegisterPayload, IAlert} from "~/types"
-import {useAuth} from '~/composables/useAuth.js';
+import {IRegisterPayload} from "~/types"
+import {useAlert, useAuth} from '~/composables';
 import {validateForm} from "~/utils"
 
 const config = useRuntimeConfig();
 const { register } = useAuth();
+const {alert, isAlertOpen, setAlert} = useAlert()
 
 definePageMeta({
     layout: "auth",
@@ -52,53 +53,34 @@ const inputChanged = (payload: {name: string, value: string}): void => {
 
 const handleLogin = async () => {
     if(!validateForm(user.value, ["username", "email", "password"])) {
-        alert.value = {
+        setAlert({
             content: "Username, Email and Password are required",
             iconClass: config.public.ICONS.ERROR,
             dark: config.public.COLORS.ALERT_DARK_ERROR,
             light: config.public.COLORS.ALERT_LIGHT_ERROR,
-        }
-        isAlertOpen.value = true;
-        console.log(config.public.COLORS.ALERT_DARK_ERROR)
+        })
 
         return;
     }
     try {
         const data = await register(user.value);
-        // show data message in an alert
-        alert.value = {
+        setAlert({
             content: data.statusMessage as string,
             iconClass: config.public.ICONS.INFO,
             dark: config.public.COLORS.ALERT_DARK_INFO,
             light: config.public.COLORS.ALERT_LIGHT_INFO,
-        }
-        isAlertOpen.value = true;
+        })
     } catch (error: any) {
-        console.log(error);
-        alert.value = {
-            content: error.statusMessage as string,
+        setAlert({
+            content: error.response.data.statusMessage as string,
             iconClass: config.public.ICONS.ERROR,
             dark: config.public.COLORS.ALERT_DARK_ERROR,
             light: config.public.COLORS.ALERT_LIGHT_ERROR,
-        }
-        isAlertOpen.value = true;
+        })
     }
 }
 
-const alert = ref<IAlert>({
-    content: '',
-    iconClass: '',
-    dark: '',
-    light: '',
-})
-const isAlertOpen = ref<boolean>(false);
 const handleCloseAlert = (): void => {
-    alert.value = {
-        content: '',
-        iconClass: '',
-        dark: '',
-        light: '',
-    }
-    isAlertOpen.value = false;
+    setAlert(null);
 }
 </script>
