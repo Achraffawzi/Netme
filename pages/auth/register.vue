@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col justify-start items-center flex-wrap mx-auto max-w-xs w-11/12 pt-5">
-        <Alert v-if="isAlertOpen" :content="alert.content" :icon-class="alert.iconClass" :dark="alert.dark" :light="alert.light" />
+        <Alert v-on:on-click="handleCloseAlert"  v-if="isAlertOpen" :content="alert.content" :icon-class="alert.iconClass" :dark="alert.dark" :light="alert.light" />
 
         <ImagePicker name="picture" @input-changed="inputChanged($event)" />
 
@@ -37,13 +37,6 @@ const user = ref<IRegisterPayload>({
     password: '',
     interests: [],
 });
-const alert = ref<IAlert>({
-    content: '',
-    iconClass: '',
-    dark: '',
-    light: '',
-})
-const isAlertOpen = ref<boolean>(false);
 
 const handleAddInterest = (payload: string): void => {
     user.value.interests = [...user.value.interests, payload];
@@ -59,7 +52,6 @@ const inputChanged = (payload: {name: string, value: string}): void => {
 
 const handleLogin = async () => {
     if(!validateForm(user.value, ["username", "email", "password"])) {
-        console.log("sdfkjsdfl")
         alert.value = {
             content: "Username, Email and Password are required",
             iconClass: config.public.ICONS.ERROR,
@@ -91,5 +83,22 @@ const handleLogin = async () => {
         }
         isAlertOpen.value = true;
     }
+}
+
+const alert = ref<IAlert>({
+    content: '',
+    iconClass: '',
+    dark: '',
+    light: '',
+})
+const isAlertOpen = ref<boolean>(false);
+const handleCloseAlert = (): void => {
+    alert.value = {
+        content: '',
+        iconClass: '',
+        dark: '',
+        light: '',
+    }
+    isAlertOpen.value = false;
 }
 </script>
