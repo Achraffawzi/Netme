@@ -4,7 +4,7 @@
             <Icon :name="iconClass" />
         </div>
         <p class="flex-1">{{ content }}</p>
-        <div class="rounded-md w-10 h-10 text-2xl flex items-center justify-center p-2 cursor-pointer bg-white/20">
+        <div class="rounded-md w-10 h-10 text-2xl flex items-center justify-center p-2 cursor-pointer hover:bg-white/20">
             <Icon name="ic:round-close" />
         </div>
     </div>
