@@ -1,20 +1,27 @@
-import { findUserByIdAndUpdateV2 } from "~/server/db/dal/users";
-import { findUserByPropService } from "~/server/services/users";
+import {
+  findUserByIdAndUpdateV2,
+  findUserByEmailAndOtpDal,
+} from "~/server/db/dal/users";
+import {
+  findUserByPropService,
+  findUserByPropsService,
+} from "~/server/services/users";
 
 export default defineEventHandler(async (event) => {
   // validate body
   const body = await readBody(event);
-  if (!body || !body.otp) {
+  if (!body || !body.otp || !body.email) {
     return sendError(event, {
       statusCode: 400,
-      statusMessage: "No OTP provided",
+      statusMessage: "No OTP or email provided",
     });
   }
 
   // verify otp
-  const { otp } = body;
+  const { otp, email } = body;
 
-  const user = await findUserByPropService("otp", otp);
+  // const user = await findUserByPropService("otp", otp);
+  const user = await findUserByEmailAndOtpDal(email, otp);
   if (!user) {
     return sendError(event, {
       statusCode: 400,
@@ -27,6 +34,7 @@ export default defineEventHandler(async (event) => {
 
   // send res
   return {
-    message: "account has been verified",
+    statusCode: 200,
+    statusMessage: "account has been verified",
   };
 });
