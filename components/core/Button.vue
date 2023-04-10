@@ -1,5 +1,5 @@
 <template>
-    <div :class="['bg-red-400', full ? 'w-full': '']">
+    <div :class="[full ? 'w-full': 'w-fit']">
         <button class="text-white bg-darkPurple py-2 px-3 rounded-md w-full">{{ content }}</button>
     </div>
 </template>

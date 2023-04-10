@@ -70,6 +70,7 @@ const handleLogin = async () => {
             dark: config.public.COLORS.ALERT_DARK_INFO,
             light: config.public.COLORS.ALERT_LIGHT_INFO,
         })
+        setTimeout(async () => await navigateTo('/auth/verify'), 5000)
     } catch (error: any) {
         setAlert({
             content: error.response.data.statusMessage as string,
