@@ -49,6 +49,23 @@ export const findUserByProp = (
   });
 };
 
+export const findUserByidAndUpdateProp = (
+  id: string,
+  prop: any,
+  value: any
+): Promise<IUserResponse | null> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user: IUserResponse | null = await Users.findByIdAndUpdate(id, {
+        [prop]: value,
+      });
+      resolve(user);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 export const findUserByEmailAndOtpDal = (
   email: string,
   otp: number

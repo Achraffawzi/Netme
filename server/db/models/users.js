@@ -44,4 +44,8 @@ userSchema.pre("save", function () {
   }
 });
 
+userSchema.methods.hashPassword = function (password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+};
+
 export default mongoose.model("user", userSchema);

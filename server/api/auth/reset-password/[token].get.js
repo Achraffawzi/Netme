@@ -25,7 +25,7 @@ export default defineEventHandler((event) => {
       resolve(true);
       return sendRedirect(
         event,
-        `${process?.env.BASE_URL}/auth/reset-password`
+        `${process?.env.BASE_URL}/auth/reset-password?_id=${paylaod._id}`
       );
     } catch (error) {
       reject(error);
