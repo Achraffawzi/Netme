@@ -23,6 +23,11 @@ const andleResetPassword = () => {
         setAlert('Both passwords are required', 'ERROR');
         return;
     }
+
+    if(newPassword.value !== newPasswordConfirm.value) {
+        setAlert('Passwords don\'t match', 'ERROR');
+        return;
+    }
 }
 
 const handleCloseAlert =() => {
