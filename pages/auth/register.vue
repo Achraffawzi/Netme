@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col justify-start items-center flex-wrap mx-auto max-w-xs w-11/12 pt-5">
-        <Alert v-on:on-click="handleCloseAlert"  v-if="isAlertOpen" :content="alert!.content" :icon-class="alert!.iconClass" :dark="alert!.dark" :light="alert!.light" />
+        <Alert @on-click="handleClearAlert" v-if="isAlertOpen" :content="alert!.content" :icon-class="alert!.iconClass" :dark="alert!.dark" :light="alert!.light" />
 
         <ImagePicker name="picture" @input-changed="inputChanged($event)" />
 
@@ -18,14 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue'
+import {ref, watch} from 'vue'
 import {IRegisterPayload} from "~/types"
 import {useAlert, useAuth} from '~/composables';
 import {validateForm} from "~/utils"
 
 const config = useRuntimeConfig();
 const { register } = useAuth();
-const {alert, isAlertOpen, setAlert} = useAlert()
+const {alert, isAlertOpen, setAlert, clearAlert} = useAlert()
+
+watch(isAlertOpen, () => console.log(isAlertOpen))
 
 definePageMeta({
     layout: "auth",
@@ -51,37 +53,22 @@ const inputChanged = (payload: {name: string, value: string}): void => {
     user.value = {...user.value, [payload.name]: payload.value};
 }
 
+const handleClearAlert = () => {
+    clearAlert()
+}
+
 const handleLogin = async () => {
     if(!validateForm(user.value, ["username", "email", "password"])) {
-        setAlert({
-            content: "Username, Email and Password are required",
-            iconClass: config.public.ICONS.ERROR,
-            dark: config.public.COLORS.ALERT_DARK_ERROR,
-            light: config.public.COLORS.ALERT_LIGHT_ERROR,
-        })
+        setAlert("Username, Email and Password are required", 'ERROR')
 
         return;
     }
     try {
         const data = await register(user.value);
-        setAlert({
-            content: data.statusMessage as string,
-            iconClass: config.public.ICONS.INFO,
-            dark: config.public.COLORS.ALERT_DARK_INFO,
-            light: config.public.COLORS.ALERT_LIGHT_INFO,
-        })
+        setAlert(data.statusMessage as string, 'INFO')
         setTimeout(async () => await navigateTo(`/auth/verify/${user.value.email}`), 5000)
     } catch (error: any) {
-        setAlert({
-            content: error.response.data.statusMessage as string,
-            iconClass: config.public.ICONS.ERROR,
-            dark: config.public.COLORS.ALERT_DARK_ERROR,
-            light: config.public.COLORS.ALERT_LIGHT_ERROR,
-        })
+        setAlert(error.response.data.statusMessage as string, 'ERROR')
     }
-}
-
-const handleCloseAlert = (): void => {
-    setAlert(null);
 }
 </script>

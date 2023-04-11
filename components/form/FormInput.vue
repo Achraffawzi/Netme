@@ -12,8 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue'
-
+import { IInputChangePayload } from '~/types'
 const emits = defineEmits(["inputChanged"])
 defineProps({
     label: {
@@ -37,7 +36,7 @@ defineProps({
     },
 })
 
-const onInputChanged = (e: {target: {name: string, value: any}}) => {
+const onInputChanged = (e: {target: IInputChangePayload }) => {
     emits("inputChanged", { name: e.target.name, value: e.target.value });
 };
 </script>

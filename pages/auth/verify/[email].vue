@@ -35,25 +35,14 @@ const handleVerifyOtp = async (): Promise<void> => {
     try {
         const digitsArrayToNumber: number = parseInt(digits.join(''));
         const data = await verify(digitsArrayToNumber, email);
-
-        setAlert({
-            content: data.statusMessage as string,
-            dark: config.public.COLORS.ALERT_DARK_SUCCESS,
-            light: config.public.COLORS.ALERT_LIGHT_SUCCESS,
-            iconClass: config.public.ICONS.SUCCESS
-        })
+        setAlert(data.statusMessage as string, 'SUCCESS')
 
         setTimeout(async () => {
             await navigateTo('/')
         }, 5000);
     } catch (error: any) {
         console.log(error)
-        setAlert({
-            content: error.response.data.statusMessage as string,
-            dark: config.public.COLORS.ALERT_DARK_ERROR,
-            light: config.public.COLORS.ALERT_LIGHT_ERROR,
-            iconClass: config.public.ICONS.ERROR
-        })
+        setAlert(error.response.data.statusMessage as string, 'ERROR')
     }
 }
 </script>

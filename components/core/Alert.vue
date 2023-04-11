@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-
+import {useAlert} from '~/composables'
 defineProps({
     iconClass: {
         type: String,
@@ -24,6 +24,8 @@ defineProps({
     dark: String,
     light: String,
 })
+
+const {clearAlert} = useAlert();
 
 const emits = defineEmits(["onClick"])
 
