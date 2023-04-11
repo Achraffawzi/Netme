@@ -48,10 +48,7 @@ export default defineEventHandler((event) => {
       setCookie(event, "refresh_token", refreshToken);
 
       // send res
-      resolve({
-        accessToken,
-        refreshToken,
-      });
+      resolve(true);
     } catch (error) {
       reject(error);
     }
