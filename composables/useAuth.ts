@@ -59,14 +59,18 @@ export const useAuth = () => {
 
   const resetPassword = (
     newPassword: string,
-    newPasswordConfirm: string
+    newPasswordConfirm: string,
+    id: string
   ): Promise<IStatusResponse> => {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data } = await $axiosPublic.post("/auth/reset-password", {
-          newPassword,
-          newPasswordConfirm,
-        });
+        const { data } = await $axiosPublic.post(
+          `/auth/reset-password?_id=${id}`,
+          {
+            newPassword,
+            newPasswordConfirm,
+          }
+        );
         resolve(data);
       } catch (error) {
         reject(error);
@@ -78,5 +82,6 @@ export const useAuth = () => {
     register,
     verify,
     forgotPassword,
+    resetPassword,
   };
 };

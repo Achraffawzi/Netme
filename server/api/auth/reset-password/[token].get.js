@@ -20,6 +20,7 @@ export default defineEventHandler((event) => {
           statusMessage: "Invalid token",
         });
       }
+      console.log(paylaod);
 
       // redirect to password reset client route
       resolve(true);

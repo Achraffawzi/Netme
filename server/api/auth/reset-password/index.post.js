@@ -1,5 +1,4 @@
 import {
-  findUserByIdAndUpdate,
   findUserByProp,
   findUserByidAndUpdateProp,
 } from "~/server/db/dal/users";
