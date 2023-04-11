@@ -1,5 +1,4 @@
 import { getUserByUsernameOrEmailService } from "~/server/services/users";
-import { userTransformer } from "~/server/transformers/user.js";
 import { generateTokenLink } from "~/server/utils/jwt";
 
 export default defineEventHandler((event) => {

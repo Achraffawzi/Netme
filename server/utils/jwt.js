@@ -13,7 +13,7 @@ const generateRefreshToken = (user) => {
 
 const generateToken = (user) => {
   return jwt.sign({ userId: user._id }, process?.env.JWT_TOKEN_SECRET, {
-    expiresIn: "1m",
+    expiresIn: "30d",
   });
 };
 
@@ -32,4 +32,15 @@ export const generateTokenLink = (user) => {
   const tokenLink = `${process.env.API_URL}/auth/reset-password/${token}`;
 
   return tokenLink;
+};
+
+export const verifyToken = (token) => {
+  try {
+    return jwt.verify(token, process?.env.JWT_TOKEN_SECRET);
+  } catch (error) {
+    throw {
+      statusCode: 400,
+      statusMessage: "Invalid token",
+    };
+  }
 };
