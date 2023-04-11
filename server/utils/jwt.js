@@ -11,6 +11,12 @@ const generateRefreshToken = (user) => {
   });
 };
 
+const generateToken = (user) => {
+  return jwt.sign({ userId: user._id }, process?.env.JWT_TOKEN_SECRET, {
+    expiresIn: "1m",
+  });
+};
+
 export const generateTokens = (user) => {
   const accessToken = generateAccessToken(user);
   const refreshToken = generateRefreshToken(user);
@@ -19,4 +25,11 @@ export const generateTokens = (user) => {
     accessToken,
     refreshToken,
   };
+};
+
+export const generateTokenLink = (user) => {
+  const token = generateToken(user);
+  const tokenLink = `${process.env.API_URL}/auth/reset-password/${token}`;
+
+  return tokenLink;
 };

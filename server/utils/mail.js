@@ -39,3 +39,40 @@ export const sendVerificationEmail = (user) => {
     }
   });
 };
+
+export const sendResetPasswordEmail = (user, tokenLink) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const transport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.APP_PASSWORD,
+        },
+        tls: {
+          rejectUnauthorized: false,
+        },
+      });
+
+      // send email
+      const mailOptions = {
+        from: process.env.EMAIL,
+        to: `<${user.email}>`,
+        subject: "Password reset",
+        html: `Click <a href='${tokenLink}' style='font-weight: bold;'>here</a> to reset your password.`,
+      };
+
+      // Sending the email
+      transport.sendMail(mailOptions, (err, data) => {
+        if (err) {
+          reject(new nodemailer.SendMailError(err));
+        } else {
+          console.log("email has been sent successfully");
+          resolve(otp);
+        }
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
