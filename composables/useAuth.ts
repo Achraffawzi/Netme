@@ -44,8 +44,22 @@ export const useAuth = () => {
     });
   };
 
+  const forgotPassword = async (email: string): Promise<IStatusResponse> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await $axiosPublic.post("/auth/forgot-password", {
+          email,
+        });
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   return {
     register,
     verify,
+    forgotPassword,
   };
 };
