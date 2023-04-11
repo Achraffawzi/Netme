@@ -1,4 +1,4 @@
-import { IRegisterPayload, IStatusResponse } from "~/types";
+import { ILoginPayload, IRegisterPayload, IStatusResponse } from "~/types";
 
 export const useAuth = () => {
   const { $axiosPublic } = useNuxtApp();
@@ -78,10 +78,22 @@ export const useAuth = () => {
     });
   };
 
+  const login = (payload: ILoginPayload): Promise<boolean> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await $axiosPublic.post("/auth/login", { ...payload });
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   return {
     register,
     verify,
     forgotPassword,
     resetPassword,
+    login,
   };
 };
