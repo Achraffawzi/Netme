@@ -57,6 +57,23 @@ export const useAuth = () => {
     });
   };
 
+  const resetPassword = (
+    newPassword: string,
+    newPasswordConfirm: string
+  ): Promise<IStatusResponse> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await $axiosPublic.post("/auth/reset-password", {
+          newPassword,
+          newPasswordConfirm,
+        });
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   return {
     register,
     verify,
