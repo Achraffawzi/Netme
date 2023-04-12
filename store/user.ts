@@ -9,6 +9,9 @@ export const useUserStore = defineStore("user", {
   actions: {
     setUser(payload: Partial<IUserResponse>) {
       this.user = { ...this.user, ...payload };
+      if (process.client) {
+        localStorage.setItem("user", JSON.stringify(this.user));
+      }
     },
   },
 });

@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { findUserByProp } from "~/server/db/dal/users";
+import { userTransformer } from "~/server/transformers/user";
 import { generateTokens } from "~/server/utils/jwt.js";
 
 export default defineEventHandler((event) => {
@@ -48,7 +49,7 @@ export default defineEventHandler((event) => {
       setCookie(event, "refresh_token", refreshToken);
 
       // send res
-      resolve(true);
+      resolve(userTransformer(user));
     } catch (error) {
       reject(error);
     }

@@ -11,13 +11,14 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import { IInputChangePayload, ILoginPayload } from '~/types';
-import {useAuth, useAlert} from '~/composables'
+import {useAuth, useAlert, useUser} from '~/composables'
 definePageMeta({
     layout: 'auth'
 })
 
 const {login} = useAuth();
 const { alert, setAlert, isAlertOpen, clearAlert } = useAlert();
+const {userStore} = useUser()
 const loginData = ref<any>({
     email: '',
     password: '',
@@ -34,9 +35,10 @@ const handleLogin = async () => {
         return;
     }
     try {
-        const isSuccess = await login(loginData.value);
-        if(isSuccess) {
-            await navigateTo('/');
+        const data = await login(loginData.value);
+        if(data) {
+            userStore.setUser(data);
+            console.log(userStore.user)
         }
     } catch (error: any) {
         setAlert(error?.response.data.statusMessage, 'ERROR')
