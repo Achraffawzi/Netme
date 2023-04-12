@@ -38,7 +38,7 @@ const handleLogin = async () => {
         const data = await login(loginData.value);
         if(data) {
             userStore.setUser(data);
-            console.log(userStore.user)
+            await navigateTo('/')
         }
     } catch (error: any) {
         setAlert(error?.response.data.statusMessage, 'ERROR')
