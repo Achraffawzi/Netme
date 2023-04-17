@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      APP_NAME: "StoryBlogy",
+      APP_NAME: "Netme",
       API_URL: process?.env?.API_URL,
 
       ICONS: {
