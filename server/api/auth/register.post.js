@@ -5,7 +5,7 @@ import {
   getUserByUsernameOrEmailService,
 } from "~/server/services/users";
 import cloudinary from "cloudinary";
-import "~/server/config/cloudinary.js";
+// import "~/server/config/cloudinary.js";
 import { sendVerificationEmail } from "~/server/utils/mail";
 import { upload } from "~/server/utils/upload";
 import { userTransformer } from "~/server/transformers/user";

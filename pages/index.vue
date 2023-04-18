@@ -1,8 +1,5 @@
 <template>
-    <Alert :icon-class="config.public.ICONS.ERROR" content="testing alert" dark='alertDarkError' light='alertLightError' />
-    <Alert :icon-class="config.public.ICONS.WARNING" content="testing alert" dark='alertDarkWarning' light='alertLightWarning' />
-        <Alert :icon-class="config.public.ICONS.SUCCESS" content="testing alert" dark='alertDarkSuccess' light='alertLightSuccess' />
-    <Alert :icon-class="config.public.ICONS.INFO" content="testing alert" dark='alertDarkInfo' light='alertLightInfo' />
+    <Avatar src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.79614a5f61617ba49a0891494521226b.svg" size="sm" alt="tailwind logo" />
 </template>
 
 <script setup>

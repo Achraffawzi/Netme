@@ -5,3 +5,4 @@ export { IStatusResponse } from "./IStatusResponse";
 export { IInputChangePayload } from "./IInputChangePayload";
 export { AlertTypes } from "./AlertTypes";
 export { ILoginPayload } from "./ILoginPayload";
+export { IPostResponse } from "./IPostResponse";

@@ -44,3 +44,8 @@ export const verifyToken = (token) => {
     };
   }
 };
+
+export const decodeToken = (token) => {
+  const payload = jwt.verify(token, process?.env.JWT_ACCESS_TOKEN_SECRET);
+  return payload;
+};

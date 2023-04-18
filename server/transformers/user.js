@@ -4,4 +4,5 @@ export const userTransformer = (user) => ({
   email: user.email,
   picture: user.picture,
   interests: user.interests,
+  bio: user.bio,
 });
