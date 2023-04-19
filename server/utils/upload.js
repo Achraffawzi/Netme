@@ -1,5 +1,5 @@
 import cloudinary from "cloudinary";
-import "~/server/config/cloudinary.js";
+// import "~/server/config/cloudinary.js";
 
 export const upload = (file, folderName) => {
   return new Promise(async (resolve, reject) => {
