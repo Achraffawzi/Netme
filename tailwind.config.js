@@ -34,21 +34,6 @@ export default {
         alertDarkInfo: "rgba(7, 144, 250, 0.7)",
         alertLightInfo: "rgba(7, 144, 250, 0.6)",
       },
-      width: {
-        sm: "50px",
-        md: "70px",
-        lg: "100px",
-      },
-      height: {
-        sm: "50px",
-        md: "70px",
-        lg: "100px",
-      },
-      spacing: {
-        sm: "50px",
-        md: "70px",
-        lg: "100px",
-      },
     },
     minWidth: {
       "1/2": "50%",

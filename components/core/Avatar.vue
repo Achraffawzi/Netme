@@ -1,11 +1,12 @@
 <template>
     <div>
-        <img :class="[`w-${size} h-${size}`]" :src="src" :alt="alt || 'Avatar'" loading="lazy">
+        <img :style="getAvatarSize" :src="src" :alt="alt || 'Avatar'" loading="lazy">
     </div>
 </template>
 
 <script setup lang="ts">
-defineProps({
+import {computed} from 'vue'
+const {size} = defineProps({
     src: {
         type: String,
         required: true,
@@ -14,8 +15,12 @@ defineProps({
         type: String,
     },
     size: {
-        type: String as PropType<"sm" | "md" | "lg">,
-        default: "md",
+        type: Number,
     }
 })
+
+const getAvatarSize = computed(() => ({
+    width: `${size}px`,
+    height: `${size}px`,
+}))
 </script>
