@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center w-9">
+    <div class="flex items-center">
         <img src="~/assets/svg/logo.svg" :alt='`${appName} Logo`' />
         <h5 class="ml-2">{{ appName }}</h5>
     </div>
