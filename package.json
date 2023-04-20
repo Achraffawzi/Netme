@@ -24,7 +24,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.1",
-    "pinia": "^2.0.34"
+    "pinia": "^2.0.34",
+    "url-pattern": "^1.0.3"
   },
   "type": "module"
 }
