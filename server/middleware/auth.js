@@ -3,7 +3,12 @@ import URLPattern from "url-pattern";
 
 export default defineEventHandler((event) => {
   // endpoints to be handled by this middleware
-  const ENDPOINTS = ["/api/auth/logout", "/api/users/user", "/api/posts/user"];
+  const ENDPOINTS = [
+    "/api/auth/logout",
+    "/api/users/user",
+    "/api/posts/user",
+    "/api/follows/user",
+  ];
 
   // check if upcoming req is handled by this middleware
   const isHandledByAuthMiddleware = ENDPOINTS.some((endpoint) => {
