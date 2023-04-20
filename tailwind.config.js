@@ -20,7 +20,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        creemy: "#F8F7FF",
+        creemy: "#F7FEFF",
         lightPurple: "#B8B8FF",
         normalPurple: "#9381FF",
         darkPurple: "#453AA4",
