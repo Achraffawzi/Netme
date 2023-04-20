@@ -5,9 +5,7 @@ export default defineEventHandler((event) => {
   console.log("tes");
   return new Promise(async (resolve, reject) => {
     try {
-      const { access_token } = parseCookies(event);
-      const { _id } = decodeToken(access_token);
-      const postsByUser = await findPostsByUserId(_id);
+      const postsByUser = await findPostsByUserId(event.context._id);
 
       resolve(postsByUser);
     } catch (error) {

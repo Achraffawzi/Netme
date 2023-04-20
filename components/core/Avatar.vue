@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <img :style="getAvatarSize" :src="src" :alt="alt || 'Avatar'" loading="lazy">
+    <div class="rounded-full">
+        <img class="rounded-full" :style="getAvatarSize" :src="src" :alt="alt || 'Avatar'" loading="lazy">
     </div>
 </template>
 
