@@ -1,9 +1,9 @@
 import { IUserFollows } from "~/types";
 
-export const usePosts = () => {
+export const useFollows = () => {
   const { $axiosPublic } = useNuxtApp();
 
-  const getPostsByUser = async (): Promise<IUserFollows> => {
+  const getFollowsByUser = async (): Promise<IUserFollows> => {
     return new Promise(async (resolve, reject) => {
       try {
         const { data } = await $axiosPublic.get("/follows/user");
@@ -15,6 +15,6 @@ export const usePosts = () => {
   };
 
   return {
-    getPostsByUser,
+    getFollowsByUser,
   };
 };
