@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   alias: {
     "@": resolve(__dirname, "/"),
   },
-
+  // ssr: false,
   typescript: {
     strict: true,
   },
@@ -22,7 +22,9 @@ export default defineNuxtConfig({
     "nuxt-icon",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
+    "@pinia/nuxt",
   ],
+  ssr: false,
   piniaPersistedstate: {
     cookieOptions: {
       sameSite: "strict",

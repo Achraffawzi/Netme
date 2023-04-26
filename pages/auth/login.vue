@@ -18,7 +18,7 @@ definePageMeta({
 
 const {login} = useAuth();
 const { alert, setAlert, isAlertOpen, clearAlert } = useAlert();
-const {userStore} = useUser()
+const {setUser} = useUser()
 const loginData = ref<any>({
     email: '',
     password: '',
@@ -37,8 +37,9 @@ const handleLogin = async () => {
     try {
         const data = await login(loginData.value);
         if(data) {
-            userStore.setUser(data);
-            await navigateTo('/')
+            // setUser(data);
+            localStorage.setItem('user', JSON.stringify(data))
+            // await navigateTo('/')
         }
     } catch (error: any) {
         setAlert(error?.response.data.statusMessage, 'ERROR')

@@ -1,8 +1,10 @@
 import { useUserStore } from "~/store/user";
 
 export const useUser = () => {
-  const user = useUserStore();
+  const userStore = useUserStore();
   return {
-    userStore: user,
+    userStore,
+    user: userStore.user,
+    setUser: userStore.setUser,
   };
 };

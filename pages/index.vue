@@ -1,9 +1,12 @@
 <template>
     <Navbar />
-    <Avatar src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.79614a5f61617ba49a0891494521226b.svg" :size="50" alt="tailwind logo" />
+    <h3>{{ user.username }}</h3>
+        <h3>{{ user.email }}</h3>
 </template>
 
 <script setup>
 import {useUser} from '~/composables/useUser';
-const {userStore} = useUser();
+const {user} = useUser();
+
+console.log(user)
 </script>
