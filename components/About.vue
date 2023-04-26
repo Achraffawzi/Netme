@@ -1,6 +1,21 @@
 <template>
-    <div>
-        {{follows}}
+    <div class="flex flex-col items-center justify-center">
+        <div class="my-5 flex items-center text-darkPurple font-bold ">
+            <p class="mr-6">{{ follows[0] }} Followers</p>
+            <p>{{ follows[1] }} Following</p>
+        </div>
+
+        <p v-if="user.bio">{{ user.bio }}</p>
+        <span>NetMe member since {{ user.createdAt }}</span>
+
+        <p class="font-bold">{{ user.username }}'s interests'</p>
+        <div class="flex items-center gap-x-2">
+            <span class="py-1 px-4 bg-gray-300 rounded-3xl text-sm" v-for="(item, index) in user.interests" :key="index">
+            {{ item }}
+        </span>
+        </div>
+
+        <Button content="Edit profile" class="text-sm" />
     </div>
 </template>
 
@@ -10,8 +25,15 @@ import {formatNumber} from '~/utils'
 
 const {getFollowsByUser} = useFollows()
 const follows = ref();
+const user = JSON.parse(localStorage.getItem('user') as string)
 
 follows.value = await getFollowsByUser();
 
-console.log(formatNumber(3400));
+
+
+follows.value = Object.values(follows.value).map((follow) => {
+    return formatNumber(follow as number);
+})
+
+console.log(follows.value)
 </script>

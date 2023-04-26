@@ -5,4 +5,5 @@ export const userTransformer = (user) => ({
   picture: user.picture,
   interests: user.interests,
   bio: user.bio,
+  createdAt: user.createdAt,
 });
