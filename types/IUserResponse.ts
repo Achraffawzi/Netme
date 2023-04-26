@@ -4,4 +4,6 @@ export interface IUserResponse {
   email: string;
   picture: string;
   interests?: Array<string>;
+  bio?: string;
+  createdAt: Date;
 }

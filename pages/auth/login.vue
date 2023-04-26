@@ -39,7 +39,7 @@ const handleLogin = async () => {
         if(data) {
             // setUser(data);
             localStorage.setItem('user', JSON.stringify(data))
-            // await navigateTo('/')
+            await navigateTo('/profile')
         }
     } catch (error: any) {
         setAlert(error?.response.data.statusMessage, 'ERROR')

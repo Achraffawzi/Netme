@@ -38,7 +38,7 @@ const handleVerifyOtp = async (): Promise<void> => {
         setAlert(data.statusMessage as string, 'SUCCESS')
 
         setTimeout(async () => {
-            await navigateTo('/')
+            await navigateTo('/auth/login')
         }, 5000);
     } catch (error: any) {
         console.log(error)
