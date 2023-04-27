@@ -1,6 +1,6 @@
 <template>
     <Modal v-if="isEdit">
-        <ProfileUpdate />
+        <ProfileUpdate @on-close-modal="onCloseModal" />
     </Modal>
     <div class="flex flex-col items-center justify-center w-[700px] max-w-[90vw] mx-auto ">
         <div class="my-5 flex items-center text-darkPurple font-bold ">
@@ -37,5 +37,8 @@ follows.value = Object.values(follows.value).map((follow) => {
 const isEdit = ref(false);
 const openModal = () => {
     isEdit.value= true;
+}
+const onCloseModal = () => {
+    isEdit.value = false;
 }
 </script>

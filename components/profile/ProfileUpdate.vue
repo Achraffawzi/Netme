@@ -10,11 +10,11 @@
                 </div>
                 <span class="text-xs text-lightTextColor">Only .PNG .JPG & .JPEG are acceptable</span>
             </div>
-            <span class="text-2xl cursor-pointer text-lightTextColor">&times;</span>
+            <span class="text-2xl cursor-pointer text-lightTextColor" @click="onCloseModal">&times;</span>
         </div>
 
         <!-- inputs -->
-        <FormInput label="Username" :value="user.username" name="username" class="w-2/6 text-sm" />
+        <FormInput label="Username" type="text" :value="user.username" name="username" class="w-2/6 text-sm" />
         <FormTextArea label="Bio" :value="user.bio" name="bio" class="w-5/6 text-sm" />
         <TagInput label="Interests" :tags="user.interests" :max="5" class="w-5/6"/>
 
@@ -27,10 +27,16 @@
 </template>
 
 <script setup lang="ts">
+const emits = defineEmits(['onCloseModal'])
+
 const user = JSON.parse(localStorage.getItem('user') as string);
 
 const inputChanged = (payload: { name: string, value: string }): void => {
     user.value = { ...user.value, [payload.name]: payload.value };
+}
+
+const onCloseModal = () => {
+    emits('onCloseModal');
 }
 
 </script>
