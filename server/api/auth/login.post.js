@@ -47,9 +47,13 @@ export default defineEventHandler((event) => {
       // save tokens in cookie
       setCookie(event, "access_token", accessToken, {
         maxAge: 604_800,
+        sameSite: true,
+        httpOnly: true,
       });
       setCookie(event, "refresh_token", refreshToken, {
         maxAge: 31_536_000,
+        sameSite: true,
+        httpOnly: true,
       });
 
       // send res
