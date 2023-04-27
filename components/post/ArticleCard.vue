@@ -64,5 +64,5 @@ const {createdAt} = defineProps({
     }
 })
 
-const {formattedDate} = useDate(createdAt);
+const {formattedDate} = useDate(createdAt, "LL");
 </script>
