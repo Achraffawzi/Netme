@@ -19,3 +19,11 @@ export const formatNumber = (number: number): string | number => {
     return number / 1_000_000 + "M";
   else return number / 1_000_000_000 + "B";
 };
+
+export const cutString = (text: string): string => {
+  if (text.length <= 250) {
+    return text;
+  } else {
+    return text.substring(0, 250);
+  }
+};
