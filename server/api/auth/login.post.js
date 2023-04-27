@@ -45,8 +45,12 @@ export default defineEventHandler((event) => {
       const { accessToken, refreshToken } = generateTokens(user);
 
       // save tokens in cookie
-      setCookie(event, "access_token", accessToken);
-      setCookie(event, "refresh_token", refreshToken);
+      setCookie(event, "access_token", accessToken, {
+        maxAge: 604_800,
+      });
+      setCookie(event, "refresh_token", refreshToken, {
+        maxAge: 31_536_000,
+      });
 
       // send res
       resolve(userTransformer(user));
