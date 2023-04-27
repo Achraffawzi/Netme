@@ -1,4 +1,7 @@
 <template>
+    <Modal v-if="isEdit">
+        <ProfileUpdate />
+    </Modal>
     <div class="flex flex-col items-center justify-center w-[700px] max-w-[90vw] mx-auto ">
         <div class="my-5 flex items-center text-darkPurple font-bold ">
             <p class="mr-6">{{ follows[0] }} Followers</p>
@@ -13,7 +16,7 @@
             <Tag v-for="(interest, index) in user.interests" :key="index" :content="interest" />
         </div>
 
-        <Button content="Edit profile" class="text-sm mt-4" />
+        <Button content="Edit profile" class="text-sm mt-4" @click="openModal" />
     </div>
 </template>
 
@@ -30,4 +33,9 @@ follows.value = await getFollowsByUser();
 follows.value = Object.values(follows.value).map((follow) => {
     return formatNumber(follow as number);
 })
+
+const isEdit = ref(false);
+const openModal = () => {
+    isEdit.value= true;
+}
 </script>
