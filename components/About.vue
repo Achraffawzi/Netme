@@ -10,9 +10,7 @@
 
         <p class="font-bold mt-5 mb-3">{{ user.username }}'s interests'</p>
         <div class="flex items-center gap-x-2">
-            <span class="py-1 px-4 bg-gray-300 rounded-3xl text-sm" v-for="(item, index) in user.interests" :key="index">
-            {{ item }}
-        </span>
+            <Tag v-for="(interest, index) in user.interests" :key="index" :content="interest" />
         </div>
 
         <Button content="Edit profile" class="text-sm mt-4" />
