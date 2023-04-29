@@ -2,11 +2,11 @@
     <div class="bg-white rounded-md p-3 w-[700px] max-w-[90vw] mx-auto shadow-lg">
         <!-- profile picture -->
         <div class="flex items-center">
-            <ImagePicker name="picture"  @input-changed="inputChanged($event)" />
+            <ImagePicker @set-original-src="setOriginalSrc($event)" :original-src="originalSrc" name="picture"  @input-changed="inputChanged($event)" />
             <div class="flex flex-col ml-5 flex-1">
                 <div>
-                    <span class="mr-3 text-darkPurple text-sm">Update</span>
-                    <span class="text-red-500 text-sm">Remove</span>
+                    <span class="mr-3 text-darkPurple text-sm cursor-pointer">Update</span>
+                    <!-- <span class="text-red-500 text-sm cursor-pointer">Remove</span> -->
                 </div>
                 <span class="text-xs text-lightTextColor">Only .PNG .JPG & .JPEG are acceptable</span>
             </div>
@@ -31,8 +31,15 @@ const emits = defineEmits(['onCloseModal'])
 
 const user = JSON.parse(localStorage.getItem('user') as string);
 
+const originalSrc = ref(user.picture)
+
+const setOriginalSrc = (value: string | null) => {
+    originalSrc.value = value;
+}
+
 const inputChanged = (payload: { name: string, value: string }): void => {
-    user.value = { ...user.value, [payload.name]: payload.value };
+    // user.value = { ...user.value, [payload.name]: payload.value };
+    // originalSrc.value = payload.value;
 }
 
 const onCloseModal = () => {
