@@ -10,7 +10,7 @@
                 </div>
                 <span class="text-xs text-lightTextColor">Only .PNG .JPG & .JPEG are acceptable</span>
             </div>
-            <span class="text-2xl cursor-pointer text-lightTextColor" @click="onCloseModal">&times;</span>
+            <span class="text-2xl cursor-pointer text-lightTextColor" @click="handleCloseModal">&times;</span>
         </div>
 
         <!-- inputs -->
@@ -20,7 +20,7 @@
 
         <!-- action buttons -->
         <div class="flex items-center justify-end">
-            <Button content="Discard" class="text-xs" :outline="true"/>
+            <Button content="Discard" class="text-xs" :outline="true" @click="handleCloseModal"/>
             <Button content="Save" class="ml-4 text-xs" />
         </div>
     </div>
@@ -42,7 +42,7 @@ const inputChanged = (payload: { name: string, value: string }): void => {
     // originalSrc.value = payload.value;
 }
 
-const onCloseModal = () => {
+const handleCloseModal = () => {
     emits('onCloseModal');
 }
 

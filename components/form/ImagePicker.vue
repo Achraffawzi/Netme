@@ -27,8 +27,6 @@ const props = defineProps({
     }
 })
 
-console.log(props.originalSrc ? props.originalSrc : null)
-
 // watch(src.value, () => {
 //     console.log("watch effect fired!")
 //     console.log(props.originalSrc)
