@@ -17,7 +17,7 @@ export default defineEventHandler((event) => {
 
       const { email, password } = body;
       // check if email exists
-      const user = await findUserByProp("email", email);
+      const user = await findUserByProp("email", email.toLowerCase());
       if (!user) {
         return sendError(event, {
           statusCode: 400,
