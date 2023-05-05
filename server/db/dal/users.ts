@@ -97,3 +97,32 @@ export const findUserByIdAndUpdateV2 = (id: string): Promise<boolean> => {
     }
   });
 };
+
+export const updateUserPicture = (
+  id: string,
+  picture?: string
+): Promise<IUserResponse | null> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // const user = await findUserByProp('_id', id);
+      // if(!user) {
+      //   reject(false);
+      // }
+
+      const updatedUser: Awaited<ReturnType<typeof updateUserPicture>> =
+        await Users.findByIdAndUpdate(
+          id,
+          {
+            picture: picture ? picture : null,
+          },
+          {
+            new: true,
+          }
+        );
+
+      resolve(updatedUser);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

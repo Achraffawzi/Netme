@@ -14,9 +14,9 @@
         </div>
 
         <!-- inputs -->
-        <FormInput label="Username" type="text" :value="user.username" name="username" class="w-2/6 text-sm" />
-        <FormTextArea label="Bio" :value="user.bio" name="bio" class="w-5/6 text-sm" />
-        <TagInput label="Interests" :tags="user.interests" :max="5" class="w-5/6"/>
+        <FormInput label="Username" type="text" :value="user.username" name="username" class="w-2/6 text-sm" @input-changed="inputChanged" />
+        <FormTextArea label="Bio" :value="user.bio" name="bio" class="w-5/6 text-sm" @input-changed="inputChanged" />
+        <TagInput label="Interests" :tags="interestsCopy" :max="5" class="w-5/6" @on-tag-added="handleAddTag($event)" @on-tag-deleted="handleDeleteTag($event)"/>
 
         <!-- action buttons -->
         <div class="flex items-center justify-end">
@@ -30,6 +30,8 @@
 const emits = defineEmits(['onCloseModal'])
 
 const user = JSON.parse(localStorage.getItem('user') as string);
+const updatedUserProps = ref({});
+let interestsCopy = ref<string[]>(user.interests)
 
 const originalSrc = ref(user.picture)
 
@@ -38,12 +40,21 @@ const setOriginalSrc = (value: string | null) => {
 }
 
 const inputChanged = (payload: { name: string, value: string }): void => {
-    // user.value = { ...user.value, [payload.name]: payload.value };
-    // originalSrc.value = payload.value;
+    updatedUserProps.value = { ...updatedUserProps.value, [payload.name]: payload.value };
 }
 
 const handleCloseModal = () => {
     emits('onCloseModal');
+}
+
+const handleAddTag = (interest: string) => {
+    interestsCopy.value.push(interest)
+    updatedUserProps.value = { ...updatedUserProps.value, interests: 'interests' in updatedUserProps.value ? [...[updatedUserProps.value.interests], interest] : [interest] };
+}
+
+const handleDeleteTag = (interests: string[]) => {
+    interestsCopy.value = [...interests]
+    updatedUserProps.value = { ...updatedUserProps.value, interests };
 }
 
 </script>

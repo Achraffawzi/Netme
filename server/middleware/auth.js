@@ -6,6 +6,7 @@ export default defineEventHandler((event) => {
   const ENDPOINTS = [
     "/api/auth/logout",
     "/api/users/user",
+    "/api/users/picture",
     "/api/posts/user",
     "/api/follows/user",
   ];
