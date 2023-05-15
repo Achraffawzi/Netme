@@ -1,5 +1,7 @@
 import { IUserResponse } from "~/types";
 import Users from "~/server/db/models/users.js";
+import { combineArraysIntoObject } from "~/utils";
+import { userTransformer } from "~/server/transformers/user";
 
 export const getUserByUsernameOrEmail = (
   username: string | undefined,
@@ -43,6 +45,26 @@ export const findUserByProp = (
         [prop]: value,
       });
       resolve(user);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const findUserByIdAndUpdateProps = (
+  id: string,
+  props: string[],
+  values: any[]
+): Promise<IUserResponse | any> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const fieldsToUpdate = combineArraysIntoObject(props, values);
+      const user: Awaited<ReturnType<typeof findUserByIdAndUpdateProps>> =
+        await Users.findByIdAndUpdate(id, fieldsToUpdate, {
+          new: true,
+        });
+
+      resolve(userTransformer(user));
     } catch (error) {
       reject(error);
     }
