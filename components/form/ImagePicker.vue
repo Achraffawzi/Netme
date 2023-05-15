@@ -16,7 +16,7 @@
 import { ref, computed } from 'vue'
 import noProfilePicture from '~/assets/images/noProfilePicture.jpg'
 
-const emits = defineEmits(["inputChanged", "setOriginalSrc"])
+const emits = defineEmits(["fileChangedEvent", "setOriginalSrc"])
 const props = defineProps({
     name: {
         type: String,
@@ -52,11 +52,11 @@ const onFileChanged = (e) => {
     const file = e.target.files[0];
     src.value = URL.createObjectURL(file);
 
-    emits("inputChanged", {name: e.target.name, value: file})
+    emits("fileChangedEvent", file)
 }
 
 const handleRemoveImage = () => {
     src.value = null;
-    emits('setOriginalSrc', null);
+    emits('fileChangedEvent', null);
 }
 </script>

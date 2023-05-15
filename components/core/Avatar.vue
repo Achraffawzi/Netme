@@ -1,6 +1,6 @@
 <template>
     <div class="rounded-full">
-        <img class="rounded-full" :style="getAvatarSize" :src="src ?? NoPicPlaceholder" :alt="alt || 'Avatar'" loading="lazy">
+        <img class="rounded-full object-cover" :style="getAvatarSize" :src="src ?? NoPicPlaceholder" :alt="alt || 'Avatar'" loading="lazy">
     </div>
 </template>
 
