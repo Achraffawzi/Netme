@@ -1,6 +1,7 @@
 <template>
     <div class="bg-white rounded-md p-3 w-[700px] max-w-[90vw] mx-auto shadow-lg">
         <!-- profile picture -->
+        <Alert class="my-3 mx-auto" @on-click="handleClearAlert" v-if="isAlertOpen" :content="alert!.content" :icon-class="alert!.iconClass" :dark="alert!.dark" :light="alert!.light" />
         <div class="flex items-center">
             <ImagePicker @set-original-src="setOriginalSrc($event)" :original-src="originalSrc" name="picture"  @file-changed-event="fileChanged($event)" />
             <div class="flex flex-col ml-5 flex-1">
@@ -27,8 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import {useUser} from '~/composables/useUser';
+import { useAlert, useUser } from '~/composables';
 
+const { alert, isAlertOpen, setAlert, clearAlert } = useAlert()
 const {updateUserPicture} = useUser();
 const emits = defineEmits(['onCloseModal'])
 
@@ -44,10 +46,14 @@ const setOriginalSrc = (value: string | null) => {
 }
 
 const handleUpdateUserPicture = async () => {
-    const response = await updateUserPicture(emittedFile.value);
-
-    // if all good => update user pic in local storage
-    localStorage.setItem('user', JSON.stringify(response));
+    try {
+        const response = await updateUserPicture(emittedFile.value);
+        setAlert("Profile picture updated successfully", 'SUCCESS');
+        // if all good => update user pic in local storage
+        localStorage.setItem('user', JSON.stringify(response));
+    } catch (error: any) {
+        setAlert(error.response.data.statusMessage as string, 'ERROR')
+    }
 }
 
 const inputChanged = (payload: { name: string, value: string }): void => {
@@ -70,6 +76,11 @@ const handleAddTag = (interest: string) => {
 const handleDeleteTag = (interests: string[]) => {
     interestsCopy.value = [...interests]
     updatedUserProps.value = { ...updatedUserProps.value, interests };
+}
+
+// ALERT LOGIC
+const handleClearAlert = () => {
+    clearAlert()
 }
 
 </script>

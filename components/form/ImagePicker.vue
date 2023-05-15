@@ -2,10 +2,10 @@
     <div class="relative inline-block imagePickeWrapper">
         <div
             class="w-20 h-20 rounded-full border border-solid border-gray-200 overflow-hidden imagePickerWrapper__imagePlaceholder">
-            <img :src="originalSrc || setImage" alt="profile picture" class="w-full h-full object-cover" />
+            <img ref="testref" :src="originalSrcCopy || setImage" alt="profile picture" class="w-full h-full object-cover" />
         </div>
         <div class="cursor-pointer absolute bottom-1 -right-1 text-xl  imagePickerWrapper__selectIcon">
-            <Icon v-if="!src && !originalSrc" name="ic:baseline-camera-alt" class="text-2xl text-gray-400" @click="openFileExplorer" />
+            <Icon v-if="!src && !originalSrcCopy" name="ic:baseline-camera-alt" class="text-2xl text-gray-400" @click="openFileExplorer" />
             <Icon v-else name="ic:outline-close" class="text-2xl text-gray-400" @click="handleRemoveImage" />
             <input :name="name" type="file" hidden="true" ref="imagePickerFileRef" accept="image/*" @change="onFileChanged">
         </div>
@@ -33,12 +33,16 @@ const props = defineProps({
 // })
 
 const src = ref(null)
+const originalSrcCopy = ref(props.originalSrc)
 const imagePickerFileRef = ref(null)
 
 const setImage = computed(() => {
-    console.log("computed property fired!")
-    console.log("props.originalSrc = ", props.originalSrc)
-    console.log("src.value = ", src.value)
+    // if(originalSrcCopy) return originalSrcCopy;
+    // if(src.value) return src.value;
+    // else {
+    //     console.log("default pic");
+    //     return noProfilePicture
+    // };
     return src.value || noProfilePicture
 });
 
@@ -55,8 +59,11 @@ const onFileChanged = (e) => {
     emits("fileChangedEvent", file)
 }
 
+const testref = ref('testref');
 const handleRemoveImage = () => {
     src.value = null;
+    originalSrcCopy.value = null;
     emits('fileChangedEvent', null);
+    console.log(testref)
 }
 </script>
