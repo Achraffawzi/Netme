@@ -27,3 +27,19 @@ export const cutString = (text: string): string => {
     return text.substring(0, 250);
   }
 };
+
+export const combineArraysIntoObject = (
+  fields: string[],
+  values: any[]
+): { [key: string]: any } => {
+  const combinedObject: ReturnType<typeof combineArraysIntoObject> = {};
+
+  for (let i = 0; i < fields.length; i++) {
+    const field = fields[i];
+    const value = values[i];
+
+    combinedObject[field] = value;
+  }
+
+  return combinedObject;
+};
