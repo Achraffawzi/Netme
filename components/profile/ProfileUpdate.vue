@@ -2,10 +2,10 @@
     <div class="bg-white rounded-md p-3 w-[700px] max-w-[90vw] mx-auto shadow-lg">
         <!-- profile picture -->
         <div class="flex items-center">
-            <ImagePicker @set-original-src="setOriginalSrc($event)" :original-src="originalSrc" name="picture"  @input-changed="inputChanged($event)" />
+            <ImagePicker @set-original-src="setOriginalSrc($event)" :original-src="originalSrc" name="picture"  @file-changed-event="fileChanged($event)" />
             <div class="flex flex-col ml-5 flex-1">
                 <div>
-                    <span class="mr-3 text-darkPurple text-sm cursor-pointer">Update</span>
+                    <span class="mr-3 text-darkPurple text-sm cursor-pointer" @click="handleUpdateUserPicture">Update</span>
                     <!-- <span class="text-red-500 text-sm cursor-pointer">Remove</span> -->
                 </div>
                 <span class="text-xs text-lightTextColor">Only .PNG .JPG & .JPEG are acceptable</span>
@@ -27,6 +27,9 @@
 </template>
 
 <script setup lang="ts">
+import {useUser} from '~/composables/useUser';
+
+const {updateUserPicture} = useUser();
 const emits = defineEmits(['onCloseModal'])
 
 const user = JSON.parse(localStorage.getItem('user') as string);
@@ -34,13 +37,25 @@ const updatedUserProps = ref({});
 let interestsCopy = ref<string[]>(user.interests)
 
 const originalSrc = ref(user.picture)
+const emittedFile = ref<File | null>(null);
 
 const setOriginalSrc = (value: string | null) => {
     originalSrc.value = value;
 }
 
+const handleUpdateUserPicture = async () => {
+    const response = await updateUserPicture(emittedFile.value);
+
+    // if all good => update user pic in local storage
+    localStorage.setItem('user', JSON.stringify(response));
+}
+
 const inputChanged = (payload: { name: string, value: string }): void => {
     updatedUserProps.value = { ...updatedUserProps.value, [payload.name]: payload.value };
+}
+
+const fileChanged = (file: File | null) => {
+    emittedFile.value = file;
 }
 
 const handleCloseModal = () => {

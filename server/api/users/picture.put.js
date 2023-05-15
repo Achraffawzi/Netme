@@ -1,5 +1,6 @@
 import formidable from "formidable";
 import { updateUserPicture } from "~/server/db/dal/users";
+import { userTransformer } from "~/server/transformers/user";
 
 export default defineEventHandler((event) => {
   const form = formidable({ multiples: false });
@@ -12,6 +13,7 @@ export default defineEventHandler((event) => {
       if (files.picture && files.picture.mimetype.startsWith("image/")) {
         try {
           var cloudinaryResult = await upload(files, "users_pictures");
+          console.log(cloudinaryResult);
         } catch (error) {
           reject(error);
         }
@@ -29,7 +31,7 @@ export default defineEventHandler((event) => {
           event.context._id,
           cloudinaryResult?.url
         );
-        resolve(result);
+        resolve(userTransformer(result));
       } catch (error) {
         reject(error);
       }
