@@ -27,8 +27,6 @@ const config = useRuntimeConfig();
 const { register } = useAuth();
 const {alert, isAlertOpen, setAlert, clearAlert} = useAlert()
 
-watch(isAlertOpen, () => console.log(isAlertOpen))
-
 definePageMeta({
     layout: "auth",
 })
