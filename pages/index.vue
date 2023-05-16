@@ -1,8 +1,9 @@
 <template>
     <Navbar />
-    <Modal>
-        test
-    </Modal>
+    <Container>
+        <!-- interests -->
+        <Interests />
+    </Container>
 </template>
 
 <script setup>

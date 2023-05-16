@@ -67,10 +67,8 @@ const handleUpdateUser = async () => {
             }
         }
         const response = await updateUser(body);
-        console.log(response)
-        // setAlert("Profile updated successfully", 'SUCCESS');
-        // // if all good => update user pic in local storage
-        // localStorage.setItem('user', JSON.stringify(response));
+        setAlert("Profile updated successfully", 'SUCCESS');
+        localStorage.setItem('user', JSON.stringify(response));
     } catch (error: any) {
         setAlert(error.response.data.statusMessage as string, 'ERROR')
     }
@@ -90,12 +88,10 @@ const handleCloseModal = () => {
 
 const handleAddTag = (interest: string) => {
     interestsCopy.value.push(interest)
-    // updatedUserProps.value = { ...updatedUserProps.value, interests: 'interests' in updatedUserProps.value ? [...[updatedUserProps.value.interests], interest] : [interest] };
 }
 
 const handleDeleteTag = (interests: string[]) => {
     interestsCopy.value = [...interests]
-    // updatedUserProps.value = { ...updatedUserProps.value, interests };
 }
 
 // ALERT LOGIC
