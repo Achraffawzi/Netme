@@ -22,7 +22,7 @@
         <!-- action buttons -->
         <div class="flex items-center justify-end">
             <Button content="Discard" class="text-xs" :outline="true" @click="handleCloseModal"/>
-            <Button content="Save" class="ml-4 text-xs" />
+            <Button content="Save" @click="handleUpdateUser" class="ml-4 text-xs" />
         </div>
     </div>
 </template>
@@ -31,7 +31,7 @@
 import { useAlert, useUser } from '~/composables';
 
 const { alert, isAlertOpen, setAlert, clearAlert } = useAlert()
-const {updateUserPicture} = useUser();
+const {updateUserPicture, updateUser} = useUser();
 const emits = defineEmits(['onCloseModal'])
 
 const user = JSON.parse(localStorage.getItem('user') as string);
@@ -56,6 +56,26 @@ const handleUpdateUserPicture = async () => {
     }
 }
 
+const handleUpdateUser = async () => {
+    try {
+        const body: {[key: string]: any} = { ...updatedUserProps.value, interests: interestsCopy.value };
+        // const formData = new FormData();
+        for (const key in body) {
+            if(typeof body[key] === "object") {
+                body[key] = JSON.stringify(body[key])
+                break;
+            }
+        }
+        const response = await updateUser(body);
+        console.log(response)
+        // setAlert("Profile updated successfully", 'SUCCESS');
+        // // if all good => update user pic in local storage
+        // localStorage.setItem('user', JSON.stringify(response));
+    } catch (error: any) {
+        setAlert(error.response.data.statusMessage as string, 'ERROR')
+    }
+}
+
 const inputChanged = (payload: { name: string, value: string }): void => {
     updatedUserProps.value = { ...updatedUserProps.value, [payload.name]: payload.value };
 }
@@ -70,12 +90,12 @@ const handleCloseModal = () => {
 
 const handleAddTag = (interest: string) => {
     interestsCopy.value.push(interest)
-    updatedUserProps.value = { ...updatedUserProps.value, interests: 'interests' in updatedUserProps.value ? [...[updatedUserProps.value.interests], interest] : [interest] };
+    // updatedUserProps.value = { ...updatedUserProps.value, interests: 'interests' in updatedUserProps.value ? [...[updatedUserProps.value.interests], interest] : [interest] };
 }
 
 const handleDeleteTag = (interests: string[]) => {
     interestsCopy.value = [...interests]
-    updatedUserProps.value = { ...updatedUserProps.value, interests };
+    // updatedUserProps.value = { ...updatedUserProps.value, interests };
 }
 
 // ALERT LOGIC

@@ -8,10 +8,10 @@
         </div>
         <Button content="Create Post" class="text-xs" />
         <Icon name="ic:baseline-notifications" class="text-2xl text-gray-400 mx-3" />
-        <Avatar src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.79614a5f61617ba49a0891494521226b.svg" :size="30" alt="profile" />
+        <Avatar :src="user.picture" :size="30" alt="profile" />
     </Container>
 </template>
 
 <script setup lang="ts">
-
+const user = JSON.parse(localStorage.getItem('user')!);
 </script>

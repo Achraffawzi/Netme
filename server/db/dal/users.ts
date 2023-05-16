@@ -58,9 +58,11 @@ export const findUserByIdAndUpdateProps = (
 ): Promise<IUserResponse | any> => {
   return new Promise(async (resolve, reject) => {
     try {
-      const fieldsToUpdate = combineArraysIntoObject(props, values);
+      let combinedObject = combineArraysIntoObject(props, values);
+      combinedObject["interests"] = JSON.parse(combinedObject["interests"]);
+
       const user: Awaited<ReturnType<typeof findUserByIdAndUpdateProps>> =
-        await Users.findByIdAndUpdate(id, fieldsToUpdate, {
+        await Users.findByIdAndUpdate(id, combinedObject, {
           new: true,
         });
 

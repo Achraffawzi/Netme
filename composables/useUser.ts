@@ -24,8 +24,22 @@ export const useUser = () => {
     });
   };
 
+  const updateUser = (props: {
+    [key: string]: any;
+  }): Promise<IUserResponse | any> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await $axiosPublic.put("/users/user", props);
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   return {
     userStore,
     updateUserPicture,
+    updateUser,
   };
 };

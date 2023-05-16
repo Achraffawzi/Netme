@@ -1,6 +1,8 @@
+// import formidable from "formidable";
 import { findUserByIdAndUpdateProps } from "~/server/db/dal/users";
 
 export default defineEventHandler((event) => {
+  // const form = formidable({ multiples: false });
   return new Promise(async (resolve, reject) => {
     try {
       const body = await readBody(event);
