@@ -54,4 +54,4 @@ userSchema.methods.hashPassword = function (password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
-export default mongoose.model("user", userSchema);
+export default mongoose.model("User", userSchema);

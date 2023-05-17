@@ -14,4 +14,4 @@ const dislikeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("dislike", dislikeSchema);
+export default mongoose.model("Dislike", dislikeSchema);

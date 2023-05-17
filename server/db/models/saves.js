@@ -14,4 +14,4 @@ const saveSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("save", saveSchema);
+export default mongoose.model("Save", saveSchema);
