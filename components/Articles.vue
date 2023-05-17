@@ -5,7 +5,7 @@
     </div>
     <div v-else>
         <div v-for="(post) in posts" :key="post._id">
-            <ArticleCard  :is-owned="true"  :title="post.title" :content="post.content" :thumbnail="post.thumbnail" :created-at="post.createdAt" :is-author="true" :username="post.authorId.username" :picture="post.authorId.picture" :reading-span="post.readingSpan" :tags="post.tags" />
+            <ArticleCard :_id="post._id" :is-owned="true"  :title="post.title" :content="post.content" :thumbnail="post.thumbnail" :created-at="post.createdAt" :is-author="true" :username="post.authorId.username" :picture="post.authorId.picture" :reading-span="post.readingSpan" :tags="post.tags" />
         </div>
     </div>
 </template>

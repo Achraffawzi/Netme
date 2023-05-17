@@ -43,3 +43,13 @@ export const combineArraysIntoObject = (
 
   return combinedObject;
 };
+
+export const getReadingSpan = (text: string): number => {
+  const avgWordsPerMinute = 200;
+
+  const words = text.split(" ");
+
+  const readingSpan = Math.ceil(words.length / avgWordsPerMinute);
+
+  return readingSpan;
+};

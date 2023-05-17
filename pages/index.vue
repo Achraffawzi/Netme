@@ -5,7 +5,10 @@
         <Interests :interests="interests" @interest-changed="handleInterestChanged($event)" />
         <!-- posts -->
         <div>
-            <ArticleCard v-for="(post) in posts" :key="post._id" class="inline-block ml-0 mb-3" :is-owned="false"  :title="post.title" :content="post.content" :thumbnail="post.thumbnail" :created-at="post.createdAt" :is-author="true" :username="post.authorId?.username" :picture="post.authorId?.picture" :reading-span="post.readingSpan" :tags="post.tags" />
+            <div v-if="posts.length > 0">
+                <ArticleCard v-for="(post) in posts" :key="post._id" class="inline-block ml-0 mb-3" :_id="post._id" :is-owned="false"  :title="post.title" :content="post.content" :thumbnail="post.thumbnail" :created-at="post.createdAt" :is-author="true" :username="post.authorId?.username" :picture="post.authorId?.picture" :reading-span="post.readingSpan" :tags="post.tags" />
+            </div>
+            <div v-else>no posts for this tag</div>
         </div>
     </Container>
 </template>
@@ -26,7 +29,7 @@ const handleInterestChanged = async (interest: string) => {
 }
 
 
-const posts = ref<Awaited<ReturnType<typeof handleGetPostsByTag>>>();
+const posts = ref<Awaited<ReturnType<typeof handleGetPostsByTag>>>([]);
 
 const {getPostsByTag} = usePosts();
 
@@ -44,6 +47,5 @@ const handleGetPostsByTag = (tag: string): Promise<IPostResponse[]> => {
 onMounted(async () => {
     const response = await handleGetPostsByTag(selectedInterest.value)
     posts.value = response;
-    console.log(posts.value)
 })
 </script>
