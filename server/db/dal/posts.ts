@@ -6,7 +6,10 @@ export const findPostsByUserId = (
 ): Promise<IPostResponse | null> => {
   return new Promise(async (resolve, reject) => {
     try {
-      const posts: any = await Posts.find({ authorId: id });
+      const posts: any = await Posts.find({ authorId: id }).populate({
+        path: "authorId",
+        select: "_id username picture",
+      });
       resolve(posts);
     } catch (error) {
       reject(error);
@@ -19,6 +22,9 @@ export const getPostsByTag = (tag: string): Promise<IPostResponse | null> => {
     try {
       const posts: any = Posts.find({
         tags: { $in: [tag] },
+      }).populate({
+        path: "authorId",
+        select: "_id username picture",
       });
       resolve(posts);
     } catch (error) {
