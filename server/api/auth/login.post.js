@@ -6,7 +6,6 @@ import { generateTokens } from "~/server/utils/jwt.js";
 export default defineEventHandler((event) => {
   return new Promise(async (resolve, reject) => {
     try {
-      // validate body
       const body = await readBody(event);
       if (!body || !body.email || !body.password) {
         return sendError(event, {
