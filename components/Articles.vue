@@ -4,19 +4,17 @@
         <Button content="Create a post" />
     </div>
     <div v-else>
-        <NuxtLink to="/" v-for="(post) in posts" :key="post._id">
-            <ArticleCard    :title="post.title" :content="post.content" :thumbnail="post.thumbnail" :created-at="post.createdAt" :is-author="true" :username="user.username" :picture="user.picture" :reading-span="post.readingSpan" :tags="post.tags" />
-        </NuxtLink>
+        <div v-for="(post) in posts" :key="post._id">
+            <ArticleCard  :is-owned="true"  :title="post.title" :content="post.content" :thumbnail="post.thumbnail" :created-at="post.createdAt" :is-author="true" :username="post.authorId.username" :picture="post.authorId.picture" :reading-span="post.readingSpan" :tags="post.tags" />
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import {ref} from 'vue'
 import { usePosts } from '~/composables';
-import { IUserResponse } from '~/types';
-const {getPostsByUser} = usePosts();
-const user = JSON.parse(localStorage.getItem('user') as string) as IUserResponse
-const posts = ref();
 
+const {getPostsByUser} = usePosts();
+const posts = ref();
 posts.value = await getPostsByUser();
 </script>
