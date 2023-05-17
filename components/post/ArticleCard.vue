@@ -22,8 +22,8 @@
                 </div>
                 <span class="text-xs text-lightTextColor mx-2">{{ readingSpan }} mins read</span>
 
-                    <span v-if="isOwned === false" class="text-xs text-lightTextColor flex-1">Selected for you</span>
-                    <Icon v-if="isOwned === false" name="ic:baseline-bookmark-border" class="text-2xl text-lightTextColor cursor-pointer" />
+                <span v-if="isOwned === false" class="text-xs text-lightTextColor flex-1">Selected for you</span>
+                <Icon v-if="isOwned === false" name="ic:baseline-bookmark-border" class="text-2xl text-lighterTextColor cursor-pointer" />
             </div>
         </NuxtLink>
     </div>

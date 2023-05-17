@@ -4,7 +4,11 @@ export interface IPostResponse {
   content: string;
   thumbnail?: string;
   tags: string[];
-  authorId?: any;
+  authorId?: {
+    _id: string;
+    username: string;
+    picture: string;
+  };
   readingSpan: number;
   createdAt: Date;
 }

@@ -3,6 +3,10 @@
     <Container>
         <!-- interests -->
         <Interests :interests="interests" @interest-changed="handleInterestChanged($event)" />
+        <!-- posts -->
+        <div>
+            <ArticleCard v-for="(post) in posts" :key="post._id" class="inline-block ml-0 mb-3" :is-owned="false"  :title="post.title" :content="post.content" :thumbnail="post.thumbnail" :created-at="post.createdAt" :is-author="true" :username="post.authorId?.username" :picture="post.authorId?.picture" :reading-span="post.readingSpan" :tags="post.tags" />
+        </div>
     </Container>
 </template>
 
@@ -17,9 +21,8 @@ const selectedInterest = ref<string>(interests[0]);
 
 const handleInterestChanged = async (interest: string) => {
     selectedInterest.value = interest;
-    const postsresponse = await handleGetPostsByTag(selectedInterest.value)
-    posts.value = postsresponse;
-    console.log(posts.value);
+    const response = await handleGetPostsByTag(selectedInterest.value)
+    posts.value = response;
 }
 
 
@@ -39,9 +42,8 @@ const handleGetPostsByTag = (tag: string): Promise<IPostResponse[]> => {
 }
 
 onMounted(async () => {
-    console.log("onMounted ran!")
-    const postsresponse = await handleGetPostsByTag(selectedInterest.value)
-    posts.value = postsresponse;
+    const response = await handleGetPostsByTag(selectedInterest.value)
+    posts.value = response;
     console.log(posts.value)
 })
 </script>
