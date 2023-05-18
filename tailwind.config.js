@@ -26,7 +26,7 @@ export default {
         darkPurple: "#453AA4",
         lightTextColor: "#555555",
         lighterTextColor: "#999",
-        lightestTextColor: "rgb(227 227 227)",
+        lightestTextColor: "rgb(246 246 246)",
         overlay: "rgba(243, 241, 241, 0.7)",
 
         alertDarkError: "#e90707b3",

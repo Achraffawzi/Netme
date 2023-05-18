@@ -3,9 +3,9 @@
         <div class="flex items-center mb-3">
             <NuxtLink :to="`/users/${authorId}`" class="flex items-center">
                 <Avatar :src="picture" :alt="username" :size="30" />
-                <span class="text-xs mx-2">{{ username }}</span>
+                <span class="text-sm mx-2">{{ username }}</span>
             </NuxtLink>
-            <span class="text-xs text-lightTextColor">{{ formattedDate }}</span>
+            <span class="text-[10px] text-lightTextColor">{{ formattedDate }}</span>
         </div>
         <NuxtLink :to="`/posts/${_id}`">
             <div class="flex items-center">
@@ -15,17 +15,17 @@
                 </div>
                 <img :src="thumbnail" :alt="title" class="w-24 h-24 rounded-lg object-fill">
             </div>
-        
-            <div class="flex items-center mt-3">
-                <div class="flex items-center gap-x-2">
-                    <Tag v-for="(tag, index) in tags" :key="index" :content="tag" />
-                </div>
-                <span class="text-xs text-lightTextColor mx-2">{{ readingSpan }} mins read</span>
-
-                <span v-if="isOwned === false" class="text-xs text-lightTextColor flex-1">Selected for you</span>
-                <Icon v-if="isOwned === false" name="ic:baseline-bookmark-border" class="text-2xl text-lighterTextColor cursor-pointer" />
-            </div>
         </NuxtLink>
+        
+        <div class="flex items-center mt-3">
+            <div class="flex items-center gap-x-2">
+                <Tag v-for="(tag, index) in tags" :key="index" :content="tag" />
+            </div>
+            <span class="text-xs text-lightTextColor mx-2">{{ readingSpan }} mins read</span>
+
+            <span v-if="isOwned === false" class="text-xs text-lightTextColor flex-1">Selected for you</span>
+            <Icon v-if="isOwned === false" name="ic:baseline-bookmark-border" class="text-2xl text-lighterTextColor cursor-pointer" />
+        </div>
     </div>
 </template>
 

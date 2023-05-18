@@ -12,7 +12,6 @@ import NoPicPlaceholder from '~/assets/images/noPicPlaceholder.jpg';
 const {size, src} = defineProps({
     src: {
         type: String,
-        required: true,
     },
     alt: {
         type: String,
