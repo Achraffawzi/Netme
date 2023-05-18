@@ -27,8 +27,20 @@ export const usePosts = () => {
     });
   };
 
+  const getPostById = (id: string): Promise<IPostResponse | null> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data } = await $axiosPublic.get(`/posts/${id}`);
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   return {
     getPostsByUser,
     getPostsByTag,
+    getPostById,
   };
 };
