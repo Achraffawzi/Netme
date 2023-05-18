@@ -32,3 +32,15 @@ export const getPostsByTag = (tag: string): Promise<IPostResponse | null> => {
     }
   });
 };
+
+export const getPostById = (id: string): Promise<IPostResponse | null> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const post: Awaited<ReturnType<typeof getPostById>> =
+        await Posts.findById(id);
+      resolve(post);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
