@@ -8,7 +8,7 @@
             <div v-if="posts.length > 0">
                 <ArticleCard v-for="(post) in posts" :key="post._id" class="inline-block ml-0 mb-3" :_id="post._id" :is-owned="false" :author-id="post.authorId?._id" :title="post.title" :content="post.content" :thumbnail="post.thumbnail" :created-at="post.createdAt" :is-author="true" :username="post.authorId?.username" :picture="post.authorId?.picture" :reading-span="post.readingSpan" :tags="post.tags" />
             </div>
-            <div v-else>no posts for this tag</div>
+            <div v-else class="text-3xl">no posts for this tag</div>
         </div>
     </Container>
 </template>
