@@ -12,9 +12,7 @@
         <span class="text-sm font-bold text-lightTextColor">NetMe member since {{ formattedDate }}</span>
 
         <p class="font-bold mt-5 mb-3">{{ user.username }}'s interests'</p>
-        <div class="flex items-center gap-x-2">
-            <Tag v-for="(interest, index) in user.interests" :key="index" :content="interest" />
-        </div>
+        <Tags :tags="user.interests" />
 
         <Button content="Edit profile" class="text-sm mt-4" @click="openModal" />
     </div>

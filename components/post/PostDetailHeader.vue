@@ -7,13 +7,16 @@
             </NuxtLink>
         </div>
         <div>
-            <span class="text-[12px] text-lighterTextColor mr-4">{{ readingSpan }} min read</span>
-            <Icon name="ic:baseline-bookmark-border" class="text-2xl text-lighterTextColor cursor-pointer" />
+            <span class="text-[12px] text-lighterTextColor mr- select-none mr-3">{{ readingSpan }} min read</span>
+            <Icon v-if="!isSaved" name="ic:baseline-bookmark-border" class="text-2xl text-lighterTextColor cursor-pointer" @click="isSaved = true" />
+            <Icon v-else name="ic:baseline-bookmark" class="text-2xl text-lighterTextColor cursor-pointer" @click="isSaved = false"  />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import {ref} from "vue";
+
 defineProps({
     _id: {
         type: String,
@@ -31,4 +34,9 @@ defineProps({
         requierd: true,
     }
 })
+
+const isSaved = ref<boolean>(false)
+const toggleSave = () => {
+    isSaved.value = !isSaved
+}
 </script>

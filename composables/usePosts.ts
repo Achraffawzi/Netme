@@ -27,7 +27,7 @@ export const usePosts = () => {
     });
   };
 
-  const getPostById = (id: string): Promise<IPostResponse | null> => {
+  const getPostById = (id: string): Promise<IPostResponse> => {
     return new Promise(async (resolve, reject) => {
       try {
         const { data } = await $axiosPublic.get(`/posts/${id}`);

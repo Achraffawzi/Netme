@@ -18,9 +18,7 @@
         </NuxtLink>
         
         <div class="flex items-center mt-3">
-            <div class="flex items-center gap-x-2">
-                <Tag v-for="(tag, index) in tags" :key="index" :content="tag" />
-            </div>
+            <Tags :tags="tags" />
             <span class="text-xs text-lightTextColor mx-2">{{ readingSpan }} mins read</span>
 
             <span v-if="isOwned === false" class="text-xs text-lightTextColor flex-1">Selected for you</span>
