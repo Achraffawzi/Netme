@@ -1,9 +1,7 @@
 import { IPostResponse } from "~/types";
 import Posts from "~/server/db/models/posts.js";
 
-export const findPostsByUserId = (
-  id: string
-): Promise<IPostResponse | null> => {
+export const findPostsByUserId = (id: string): Promise<IPostResponse[]> => {
   return new Promise(async (resolve, reject) => {
     try {
       const posts: any = await Posts.find({ authorId: id }).populate({
@@ -37,7 +35,7 @@ export const getPostById = (id: string): Promise<IPostResponse | null> => {
   return new Promise(async (resolve, reject) => {
     try {
       const post: Awaited<ReturnType<typeof getPostById>> =
-        await Posts.findById(id);
+        await Posts.findById(id).populate("authorId", "_id username picture");
       resolve(post);
     } catch (error) {
       reject(error);
