@@ -4,7 +4,7 @@ export default defineEventHandler((event) => {
   return new Promise(async (resolve, reject) => {
     try {
       const body = await readBody(event);
-      if (!body || body.authorId) {
+      if (!body || !body.authorId) {
         return sendError(event, {
           statusCode: 400,
           statusMessage: "No authorId provided",
