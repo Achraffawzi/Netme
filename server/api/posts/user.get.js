@@ -1,4 +1,3 @@
-import { decodeToken } from "~/server/utils/jwt";
 import { findPostsByUserId } from "~/server/db/dal/posts";
 
 export default defineEventHandler((event) => {
