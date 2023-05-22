@@ -2,10 +2,10 @@
     <div>
         <Navbar />
         <Container class="mt-5">
-            <div class="flex gap-16">
+            <div class="flex gap-16 relative">
                 <!-- post details wrapper -->
                 <div class=" w-3/5 border border-lightestTextColor p-3">
-                    <PostDetailHeader :_id="user._id" :username="user.username" :picture="user.picture" :reading-span="3" />
+                    <PostDetailHeader :_id="post?.authorId?._id" :username="post?.authorId?.username" :picture="post?.authorId?.picture" :reading-span="post?.readingSpan" />
                     <h3 class="font-bold text-2xl mt-4 mb-3">{{ post?.title }}</h3>
                     <img :src="post?.thumbnail" :alt="post?.title" class="w-full h-96 object-fit">
                     <p class="mt-3 mb-4">{{ post?.content }}</p>
@@ -30,8 +30,24 @@
                                 <!-- <span>Thanks</span> -->
                             </div>
                     </div>
+
+                    <!-- more from author -->
+                    <div class="mt-5 xl:w-2/3" v-if="morePosts?.length > 0">  
+                        <h3 class="font-bold text-xl">More from {{ post?.authorId?.username }}</h3>
+                        <div v-for="item in morePosts" :key="item._id">
+                            <ArticleCardMore :_id="item?._id" :picture="item.thumbnail" :title="item?.title" :content="item?.content" />
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-green-600 flex-grow">rightside</div>
+                <div class="w-2/5 border border-lightestTextColor p-3">
+                    <h3 class="font-bold text-xl mb-3">More articles like this</h3>
+                    <div>
+                        <NuxtLink v-for="item in postsAlike" :key="item._id" :to="`/posts/${item._id}`">
+                            <ArticleCardMoreRightside class="mb-5"  :_id="item._id" :picture="item.authorId?.picture" :username="item?.authorId?.username" :title="item.title" :content="item.content" :thumbnail="item.thumbnail" />
+                        </NuxtLink>
+                    </div>
+                    <NuxtLink class="text-xs text-darkPurple">See even more posts like this</NuxtLink>
+                </div>
             </div>
         </Container>
     </div>
@@ -45,7 +61,7 @@ import {formatNumber} from '~/utils'
 
 const user = JSON.parse(localStorage.getItem('user')!);
 const {params} = useRoute();
-const {getPostById} = usePosts()
+const {getPostById, getPostsByAuthor, getPostsByTags} = usePosts()
 const post = ref<IPostResponse>();
 
 const {getTotalLikesByPostId} = useLikes();
@@ -53,10 +69,19 @@ const likes = ref<string>("")
 const isLiked = ref<boolean>(false);
 const isDisliked = ref<boolean>(false);
 
+const morePosts = ref<IPostResponse[]>([])
+const postsAlike = ref<IPostResponse[]>([])
+
 onMounted(async () => {
     Promise.all([getPostById(params._id as string), getTotalLikesByPostId(params._id as string)]).then((values: any) => {
         post.value = values[0];
         likes.value = formatNumber(values[1].data) as string
+        console.log(post.value);
+    }).then(async () => {
+        const postsResponce = await getPostsByTags([...(post.value?.tags as string[])])
+        const response = await getPostsByAuthor(post.value?.authorId as string)
+        postsAlike.value = postsResponce;
+        morePosts.value = response.filter(p => p._id !== params._id);
     })
 })
 </script>

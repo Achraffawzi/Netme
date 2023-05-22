@@ -1,4 +1,4 @@
-import { getPostsByTag } from "~/server/db/dal/posts";
+import { getPostsByTags } from "~/server/db/dal/posts";
 
 export default defineEventHandler((event) => {
   return new Promise(async (resolve, rejrect) => {
@@ -11,7 +11,7 @@ export default defineEventHandler((event) => {
         });
       }
 
-      const posts = await getPostsByTag(body.interest);
+      const posts = await getPostsByTags(body.interest);
       resolve(posts);
     } catch (error) {
       rejrect(error);

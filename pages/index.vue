@@ -24,19 +24,19 @@ const selectedInterest = ref<string>(interests[0]);
 
 const handleInterestChanged = async (interest: string) => {
     selectedInterest.value = interest;
-    const response = await handleGetPostsByTag(selectedInterest.value)
+    const response = await handleGetPostsByTag([selectedInterest.value])
     posts.value = response;
 }
 
 
 const posts = ref<Awaited<ReturnType<typeof handleGetPostsByTag>>>([]);
 
-const {getPostsByTag} = usePosts();
+const {getPostsByTags} = usePosts();
 
-const handleGetPostsByTag = (tag: string): Promise<IPostResponse[]> => {
+const handleGetPostsByTag = (tags: string[]): Promise<IPostResponse[]> => {
     return new Promise(async (resolve, reject) => {
         try {
-            const posts: Awaited<ReturnType<typeof handleGetPostsByTag>> = await getPostsByTag(tag)
+            const posts: Awaited<ReturnType<typeof handleGetPostsByTag>> = await getPostsByTags(tags)
             resolve(posts)
         } catch (error) {
             reject(error)
@@ -45,7 +45,7 @@ const handleGetPostsByTag = (tag: string): Promise<IPostResponse[]> => {
 }
 
 onMounted(async () => {
-    const response = await handleGetPostsByTag(selectedInterest.value)
+    const response = await handleGetPostsByTag([selectedInterest.value])
     posts.value = response;
 })
 </script>

@@ -27,11 +27,11 @@ export const usePosts = () => {
     });
   };
 
-  const getPostsByTag = (tag: string): Promise<IPostResponse[]> => {
+  const getPostsByTags = (tags: string[]): Promise<IPostResponse[]> => {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data } = await $axiosPublic.post("/posts/tag", {
-          interest: tag,
+        const { data } = await $axiosPublic.post("/posts/tags", {
+          interests: tags,
         });
         resolve(data);
       } catch (error) {
@@ -54,7 +54,7 @@ export const usePosts = () => {
   return {
     getPostsByUser,
     getPostsByAuthor,
-    getPostsByTag,
+    getPostsByTags,
     getPostById,
   };
 };
